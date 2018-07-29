@@ -1,0 +1,6 @@
+-dce full
+-cp tests
+-lib xDOM
+-main RunTests
+-lib hxnodejs
+-js bin/test.js

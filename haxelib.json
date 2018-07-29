@@ -1,0 +1,17 @@
+{
+	"name": "xDOM",
+	"classPath": "src",
+	"dependencies": {},
+	"url": "https://github.com/back2dos/xDOM/",
+	"contributors": [
+		"back2dos"
+	],
+	"version": "0.1.0",
+	"releasenote": "Initial version.",
+	"tags": [
+		"dom",
+		"html",
+		"jquery"
+	],
+	"license": "MIT"
+}
