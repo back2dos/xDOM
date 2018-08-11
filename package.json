@@ -1,0 +1,9 @@
+{
+  "name": "xdom",
+  "scripts": {
+    "postinstall": "lix download"
+  },
+  "dependencies": {
+    "lix": "^15.3.0-alpha.1"
+  }
+}

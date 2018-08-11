@@ -1,5 +1,9 @@
 {
   "haxe.displayConfigurations": [
-    ["tests.hxml"]
-  ]
+    ["dev.hxml"]
+  ],
+  "haxe.executable": {
+    "path": "node_modules/.bin/haxe",
+    "windows": "node_modules\\.bin\\haxe.cmd"
+  }
 }

@@ -1,6 +1,4 @@
 -dce full
 -cp tests
--lib xDOM
+-lib tink_unittest
 -main RunTests
--lib hxnodejs
--js bin/test.js
