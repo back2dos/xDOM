@@ -16,28 +16,34 @@ abstract EventSource<T, E:NativeEvent>(Callback<Evt<T, E>>->CallbackLink) {
   #if !macro
   inline function new(f) this = f;
 
-  public function once(c:Callback<Evt<T, E>>) {
-    var link:CallbackLink = null;
-    link = this(function (v) {
-      c.invoke(v);
-      link.dissolve();
-      c = null;
-      link = null;
-    });
-    return link;
+  public function once(c:Callback<Evt<T, E>>):CallbackLink
+    return @:privateAccess EventSignal.callOnce(this, c);
+
+  public var signal(get, never):Signal<Evt<T, E>>;
+
+  @:to function get_signal():Signal<Evt<T, E>> {
+    var self:Dynamic = this;
+    if (self.__xdomSignal == null)
+      self.__xdomSignal = Signal.create(
+        function (cb) return this(cb)
+      );
+    return self.__xdomSignal;
   }
 
-  @:to public function toSignal():Signal<Evt<T, E>>
-    return Signal.create({
-      var link:CallbackLink = null;
-      {
-        activate: function (cb) link = this(cb),
-        suspend: function () link.dissolve()
-      }
-    });
+  public function map<R>(f:Evt<T, E>->R):Signal<R>
+    return signal.map(f);
 
-  public function map<R>(f:Evt<T, E>->R)
-    return toSignal().map(f);
+  public function filter(f:Evt<T, E>->Bool):Signal<Evt<T, E>>
+    return signal.filter(f);
+
+  public function select<R>(f:Evt<T, E>->Option<R>):Signal<R>
+    return signal.select(f);
+
+  public function join(other:Signal<Evt<T, E>>):Signal<Evt<T, E>>
+    return signal.join(other);
+
+  public function nextTime(?condition:Evt<T, E>->Bool):Future<Evt<T, E>>
+    return signal.nextTime(condition);
 
   @:noCompletion public function delegate<C>(s:Selector<C>, cb:Callback<Evt<C, E>>):CallbackLink {
     return this(function (e) {
@@ -88,14 +94,34 @@ abstract EventSource<T, E:NativeEvent>(Callback<Evt<T, E>>->CallbackLink) {
       case null | macro null:
         macro @:pos(Context.currentPos()) {
           var __link = null;
-          tink.core.Signal.create({
-            activate: function (cb) __link = ${delegate(macro cb)},
-            suspend: function () __link.dissolve()
-          });
+          xdom.html.EventSource.EventSignal.of(tink.core.Signal.create(
+            function (cb) return ${delegate(macro cb)}
+          ));
         }
       default:
         delegate(cb);
     }
   }
   
+}
+
+@:forward
+abstract EventSignal<T>(Signal<T>) from Signal<T> to Signal<T> {
+  public function once(c:Callback<T>):CallbackLink 
+    return callOnce(this.handle, c);
+
+  @:noCompletion
+  static public inline function of<T>(s:Signal<T>):EventSignal<T>
+    return (s:EventSignal<T>);
+
+  @:extern static inline function callOnce<X>(register:Callback<X>->CallbackLink, c:Callback<X>) {
+    var link:CallbackLink = null;
+    link = register(function (v) {
+      c.invoke(v);
+      link.dissolve();
+      c = null;
+      link = null;
+    });
+    return link;
+  }
 }

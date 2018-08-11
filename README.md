@@ -1,16 +1,28 @@
 # xDOM - regular DOM with that little extra
 
-This library adds a few convenient niceties on top of the DOM. Think jQuery, but less runtime wrapping and with Haxe in mind.
+This library adds a few convenient niceties on top of the DOM. Think jQuery, but less runtime wrapping and with Haxe in mind. It also offer integration with `tink.core.Signal`, but feel free to ignore it if that approach does not appeal to you.
+
+The extra functionality is obtained by wrapping dom nodes in the `xdom.Wrapped<T>` abstract (which exists at compile time only) where `T` is the concrete node type, e.g. `js.html.Node` or `js.html.SelectElement`.
+
+There are two easy entrypoints into using `xDOM`, both of which become available with `import xdom.XDom.*`:
+
+- `X`: called with any node, you will obtain a wrapped version
+- `document`: this is a wrapped document, which when queried for descendants returns wrapped versions again.
+
+The following examples tend to use `document`, but all of them would work with any X-wrapped
 
 1. **type safe querying**, i.e. `document.find('form input:checked')[0]` is known to be an input element and so accessing its `value` property is done in a type safe manner - with auto completion:
 
   ![]()
 
-  Also, selectors are parsed at compile time.
+  Also, selectors are validated at compile time.
 
   The resulting collection allows for array access, iteration or more jQuery-esque chaining:
 
   ```haxe
+  //Ordinary loop:
+  for (e in document.find('form input:checked')) e.checked = false;
+  //With function:
   document.find('form input:checked').each(e -> e.checked = false);
   //Or the slightly shorter version
   document.each('form input:checked', e -> e.checked = false);
@@ -46,10 +58,14 @@ This library adds a few convenient niceties on top of the DOM. Think jQuery, but
     document.onchange.within('input[type="radio"][name="font-size"]').map(e -> e.target.value);
     ```
 
+    In this case we're mapping it to produce a signal of font sizes.
+
   - With just a selector, chaining with `once`
 
     ```haxe
     document.onclick.within('button.big.red').once(launchMissiles);
     ```
+
+    The result of this is again a `CallbackLink`
 
   Note that the `currentTarget` of the event will point to the element that was matched (the big red button in this case), not the one where the handler was registered (the document in this case).

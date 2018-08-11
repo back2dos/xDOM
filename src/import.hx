@@ -1,5 +1,5 @@
 using tink.CoreApi;
 using StringTools;
 #if js
-import js.Browser.*;
+import xdom.XDom.*;
 #end
