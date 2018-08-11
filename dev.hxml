@@ -1,3 +1,4 @@
 tests.hxml
+-lib xDOM
 -lib hxnodejs
 -js bin/test.js
