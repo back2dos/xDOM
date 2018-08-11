@@ -30,19 +30,28 @@ class Basic {
 
     var count = 0;
 
-    document.onclick.within('button').once(_ -> count++);
-
-    var first = document.find('button')[0];
+    document.onclick.once(_ -> count++);
+    document.onclick.within('button.foo').once(_ -> count++);
+    document.onclick.within('button.bar').once(_ -> count++);
+    document.onclick.within('button.foo.bar', _ -> count++);
 
     test.assert(count == 0);
 
-    first.click();
+    document.find('button.bop')[0].click();
 
     test.assert(count == 1);
-    
-    first.click();
-    
+
+    document.find('button.bop')[0].click();
+
     test.assert(count == 1);
+
+    document.find('button.foo.bar')[0].click();
+
+    test.assert(count == 4);
+
+    document.find('button.foo.bar')[0].click();
+
+    test.assert(count == 5);
 
     return test.done();
   }
