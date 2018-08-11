@@ -37,7 +37,7 @@ abstract Selector<T>(String) to String {
         types[tag];
       default: macro : js.html.Element;
     }
-
-    return macro @:pos(e.pos) @:privateAccess new xdom.Selector<$type>($e);
+    
+    return macro @:pos(e.pos) @:privateAccess new xdom.Selector<xdom.Wrapped<$type>>($e);
   }
 }

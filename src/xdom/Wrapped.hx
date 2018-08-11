@@ -12,6 +12,9 @@ package xdom;
 private typedef Native = 
   #if macro {} #else js.html.Node #end
 
+#if !macro
+@:build(xdom.macros.Build.events(([tink.domspec.Events]:Wrapped<T>)))
+#end
 @:forward
 abstract Wrapped<T:Native>(T) from T to T {
 
@@ -20,8 +23,6 @@ abstract Wrapped<T:Native>(T) from T to T {
 
   macro public function each(ethis:Expr, selector:Expr, cb) 
     return macro @:pos(Context.currentPos()) $ethis.qsa(xdom.Selector.parse($selector)).each($cb);
-
-
 
   #if !macro
   public var nodeList(get, never):Collection<Node>;
@@ -59,15 +60,6 @@ abstract Dataset(Dynamic<DatasetValue>) {
 
   public inline function toggle(name:String, ?force:Bool)
     __setProperty(name, if (force == null) !__getProperty(name) else !force);
-}
-
-abstract If<Cond, Cons, Alt, Ret>(Dynamic) {
-  @:from static function negative<Cond, Cons, Ret>(v:Class<Void>):If<Cond, Cons, Ret, Ret>
-    return cast null;
-
-  @:from static function positive<Cond, Alt, Ret>(v:Cond):If<Cond, Ret, Alt, Ret>
-    return cast null;
-
 }
 
 @:forward
