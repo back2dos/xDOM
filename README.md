@@ -11,11 +11,13 @@ There are two easy entrypoints into using `xDOM`, both of which become available
 
 The following examples tend to use `document`, but all of them would work with any X-wrapped
 
-1. **type safe querying**, i.e. `document.find('form input:checked')[0]` is known to be an input element and so accessing its `value` property is done in a type safe manner - with auto completion:
+1. **type safe querying**, i.e. `document.find('form input:checked')[0]` is known to be an input element and so accessing its `value` property is done in a type safe manner - with auto completion and code navigation:
 
-  ![]()
+  <img src="https://user-images.githubusercontent.com/509501/43994633-8d11a412-9da0-11e8-9425-6ab92e32c0bf.gif" width="450px">
 
-  Also, selectors are validated at compile time.
+  Also, selectors are validated at compile time:
+  
+  <img src="https://user-images.githubusercontent.com/509501/43994718-0fc340ea-9da2-11e8-8258-3c157dcd3cc1.gif" width="450px">
 
   The resulting collection allows for array access, iteration or more jQuery-esque chaining:
 
