@@ -50,7 +50,7 @@ abstract Wrapped<T:Native>(T) from T to T {
 @:forward
 abstract Dataset(Dynamic<DatasetValue>) {
   @:arrayAccess inline function __getProperty(name:String):DatasetValue
-    return js.Syntax.field(this, name);
+    return (untyped this[name]:DatasetValue);
 
   @:arrayAccess inline function __setProperty(name:String, value:DatasetValue):DatasetValue
     return untyped this[name] = value;

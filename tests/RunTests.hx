@@ -30,10 +30,10 @@ class Basic {
 
     var count = 0;
 
-    document.onclick.once(_ -> count++);
-    document.onclick.within('button.foo').once(_ -> count++);
-    document.onclick.within('button.bar').once(_ -> count++);
-    document.onclick.within('button.foo.bar', _ -> count++);
+    document.onclick.once(function () count++);
+    document.onclick.within('button.foo').once(function () count++);
+    document.onclick.within('button.bar').once(function () count++);
+    document.onclick.within('button.foo.bar', function () count++);
 
     test.assert(count == 0);
 

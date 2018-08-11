@@ -53,7 +53,7 @@ abstract EventSource<T, E:NativeEvent>(Callback<Evt<T, E>>->CallbackLink) {
       while (cur != null) {
         if (cur.matches(s)) {
           var event:Dynamic = { currentTarget: cur };
-          js.Object.setPrototypeOf(event, cast e);
+          untyped Object.setPrototypeOf(event, e);
           cb.invoke(event);
         }
         if (cur == root) break;
