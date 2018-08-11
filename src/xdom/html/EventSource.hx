@@ -52,13 +52,9 @@ abstract EventSource<T, E:NativeEvent>(Callback<Evt<T, E>>->CallbackLink) {
 
       while (cur != null) {
         if (cur.matches(s)) {
-          //perhaps Object.assign is better here
-          var Event:Class<Dynamic> = cast function () {
-            js.Lib.nativeThis.currentTarget = cur;
-          }
-          untyped Event.prototype = e;
-
-          cb.invoke(js.Syntax.construct(Event));
+          var event:Dynamic = { currentTarget: cur };
+          js.Object.setPrototypeOf(event, cast e);
+          cb.invoke(event);
         }
         if (cur == root) break;
         cur = cur.parentElement;

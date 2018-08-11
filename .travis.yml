@@ -11,4 +11,5 @@ install:
   - npm ci
 
 script:
-  - lix run travix node --macro includeFile('fakedom.js')
+  - neko
+  - lix run travix node

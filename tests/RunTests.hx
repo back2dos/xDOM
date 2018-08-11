@@ -30,7 +30,7 @@ class Basic {
 
     var count = 0;
 
-    document.onclick.within('button').handle(_ -> count++);
+    document.onclick.within('button').once(_ -> count++);
 
     var first = document.find('button')[0];
 
