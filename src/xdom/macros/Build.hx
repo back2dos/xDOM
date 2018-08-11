@@ -44,7 +44,7 @@ class Build {
                   getter = 'get_${f.name}',
                   type = macro : xdom.html.EventSource<$as, $event>;
 
-              add(macro class {
+              add(macro class {//TODO: use more meaningful positions here
                 public var $field(get, never):$type;
                 inline function $getter():$type
                   return xdom.html.EventSource.make(this, $v{f.name.substr(2)});
