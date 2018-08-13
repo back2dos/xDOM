@@ -76,4 +76,4 @@ And really, that's it. On top of that, you can just use the plain DOM APIs.
 
 ## Why shadow `onclick` etc.?
 
-As a rule, this library tries not to abstract away the DOM, just add a bit of type safety and convenience. That said, using `element.onclick = function () {...}` is largely discouraged in favor of the more recent `element.addEventListener('click', function () {...})` for various reasons. Arguably no harm is done in overwriting it. And doing so results in straight forward autocompletion and short notation for events.
+As a rule, this library tries not to abstract away the DOM, just add a bit of type safety and convenience. That said, using `element.onclick = function () {...}` is largely discouraged in favor of the more recent `element.addEventListener('click', function () {...})` for various reasons. Arguably no harm is done in shadowing it. And doing so results in straight forward autocompletion and short notation for events.
