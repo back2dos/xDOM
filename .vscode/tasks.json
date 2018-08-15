@@ -6,7 +6,7 @@
     {
       "type": "shell",
       "label": "travix",
-      "command": "lix run travix node",
+      "command": "lix run travix js",
       "problemMatcher": [
         "$haxe-absolute",
         "$haxe",

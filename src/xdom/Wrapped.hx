@@ -29,20 +29,37 @@ abstract Wrapped<T:Native>(T) from T to T {
     inline function get_nodeList()
       return (untyped this.nodeList || [] : Collection<Node>);
 
-  public var elements(get, never):Collection<Element>;
-    inline function get_elements()
-      return (untyped this.elements || [] : Collection<Element>);
+  public var children(get, never):Collection<Element>;
+    inline function get_children()
+      return (untyped this.children || [] : Collection<Element>);
 
   public var dataset(get, never):Dataset;
     inline function get_dataset()
       return (untyped this.dataset || {} : Dataset);
 
-  @:noCompletion public function qsa<R>(selector:Selector<R>):Collection<R>
-    return 
-      try cast (cast this:js.html.Element).querySelectorAll(selector)
-      catch (e:Dynamic) cast EMPTY;//not sure if silent pokemon clause is really reasonable here
+  //TODO: firstChild, firstElementChild, ...
+  @:noCompletion public function qsa<R>(selector:Selector<R>):Collection<R> 
+    return
+      if (this != null && untyped this.querySelectorAll != null) {
+        if (this == cast document) cast document.querySelectorAll(selector);
+        else {
+          var e:js.html.Element = cast this;
+          cast (
+            if (e.matches(selector))
+              [e]
+            else 
+              []
+          ).concat(
+            (cast e.querySelectorAll(Selector.prefixed(e, selector)) : Collection<js.html.Element>)
+          );
+        }
+      }
+      else Collection.empty();
+  
+  @:to static function upcast<T:js.html.Node>(w:Wrapped<T>):Wrapped<js.html.Node>
+    return cast w;
 
-  static var EMPTY = [];
+
   #end
 }
 

@@ -4,7 +4,6 @@
     "postinstall": "lix download"
   },
   "dependencies": {
-    "jsdom": "^11.12.0",
     "lix": "^15.3.0-alpha.1"
   }
 }

@@ -15,10 +15,14 @@ abstract Collection<T>(Array<T>) {//This is actually never an Array but rather a
     for (i in 0...this.length) f(cast this[i]);
 
   @:to public function toArray():Array<T>
-    return untyped Array.prototype.slice(this);
+    return untyped Array.prototype.slice.call(this);
 
   macro public function find(ethis:Expr, selector:Expr) 
     return macro @:pos(Context.currentPos()) $ethis.qsa(xdom.Selector.parse($selector));
+
+  static var EMPTY = [];
+  static public function empty<T>():Collection<T>
+    return cast EMPTY;
 
   #if !macro
   @:noCompletion public function qsa<R>(selector:Selector<R>):Collection<R> {

@@ -46,12 +46,16 @@ abstract EventSource<T, E:NativeEvent>(Callback<Evt<T, E>>->CallbackLink) {
     return signal.nextTime(condition);
 
   @:noCompletion public function delegate<C>(s:Selector<C>, cb:Callback<Evt<C, E>>):CallbackLink {
+    var prefixed = null;
     return this(function (e) {
       var root:js.html.Element = cast e.currentTarget,
           cur:js.html.Element = e.target;
 
+      if (prefixed == null)
+        prefixed = Selector.prefixed(root, s, true);
+
       while (cur != null) {
-        if (cur.matches(s)) {
+        if (cur.matches(prefixed)) {
           var event:Dynamic = { currentTarget: cur };
           untyped Object.setPrototypeOf(event, e);
           cb.invoke(event);
@@ -66,7 +70,7 @@ abstract EventSource<T, E:NativeEvent>(Callback<Evt<T, E>>->CallbackLink) {
   @:noCompletion 
   static public function make<T, E:NativeEvent>(target:T, event:String)
     return 
-      if (target != null && untyped target.children != null) {
+      if (target != null && untyped target.addEventListener != null) {
         var target:js.html.Element = cast target;
         new EventSource<T, E>(function (cb) {
           function handle(event) cb.invoke(event);

@@ -2,4 +2,3 @@
 -cp tests
 -lib tink_unittest
 -main RunTests
---macro includeFile("tests/fakedom.js")

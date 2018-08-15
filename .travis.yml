@@ -12,4 +12,4 @@ install:
 
 script:
   - neko
-  - lix run travix node
+  - lix run travix js

@@ -12,5 +12,8 @@ abstract Document(Wrapped<Doc>) from Doc from Wrapped<Doc> {
   public function getElementById(id:String):Element
     return this.getElementById(id);
 
+  @:to function toNode():Node
+    return (this:js.html.Node);
+
   //TODO: getElementsByTagName
 }
