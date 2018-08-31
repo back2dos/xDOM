@@ -60,7 +60,7 @@ abstract Selector<T>(String) to String {
         switch scope.id {
           case null, '':
             if (forceId || !document.documentElement.contains(scope)) 
-              '#'+(scope.id = '_xdom_$ns_${counter++}');//[data-id=...] might be a better choice performance wise. Even though it's probably more expensive to query, setting IDs does seem to invalidate layout on IE and Edge
+              '#'+(scope.id = '_xdom_${ns}_${counter++}');//[data-xdom-id=...] might be a better choice performance wise. Even though it's probably more expensive to query, setting IDs does seem to invalidate layout on IE and Edge
             else if (hasScope) ':scope';
             else {
               var cur = scope;
