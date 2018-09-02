@@ -1,7 +1,10 @@
 {
 	"name": "xDOM",
 	"classPath": "src",
-	"dependencies": {},
+	"dependencies": {
+		"tink_macro": "",
+		"tink_domspec": ""
+	},
 	"url": "https://github.com/back2dos/xDOM/",
 	"contributors": [
 		"back2dos"
