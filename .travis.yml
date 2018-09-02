@@ -11,5 +11,4 @@ install:
   - npm ci
 
 script:
-  - neko
-  - lix run travix js
+  - npm run lix travix js
