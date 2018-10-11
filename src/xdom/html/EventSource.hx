@@ -80,7 +80,7 @@ abstract EventSource<T, E:NativeEvent>(Callback<Evt<T, E>>->CallbackLink) {
       }
       else {
         #if debug
-        console.warning('attempted to register `$event` event on', target);
+        console.warn('attempted to register `$event` event on', target);
         #end
         new EventSource<T, E>(function (cb) return null);
       }
