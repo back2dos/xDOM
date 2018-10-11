@@ -1,0 +1,3 @@
+# @install: lix --silent download "https://github.com/back2dos/pick.first/archive/533af8000b87079c66fb6128f40403b2a5178f81.tar.gz" into pick.first/0.0.0/github/533af8000b87079c66fb6128f40403b2a5178f81
+-D pick.first=0.0.0
+-cp ${HAXESHIM_LIBCACHE}/pick.first/0.0.0/github/533af8000b87079c66fb6128f40403b2a5178f81/src
