@@ -7,7 +7,7 @@ import js.html.HTMLDocument as Doc;
 abstract Document(Wrapped<Doc>) from Doc from Wrapped<Doc> {
   public var body(get, never):Wrapped<js.html.BodyElement>;
     inline function get_body() 
-      return (this.body:Wrapped<js.html.BodyElement>);
+      return (cast this.body:Wrapped<js.html.BodyElement>);
 
   public function getElementById(id:String):Element
     return this.getElementById(id);
