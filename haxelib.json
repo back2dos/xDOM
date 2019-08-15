@@ -2,7 +2,7 @@
 	"name": "xDOM",
 	"classPath": "src",
 	"dependencies": {
-		"tink_macro": "",
+		"tink_csss": "",
 		"tink_domspec": "",
 		"pick.first": "git:https://github.com/back2dos/pick.first"
 	},
