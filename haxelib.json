@@ -3,7 +3,6 @@
 	"classPath": "src",
 	"dependencies": {
 		"tink_csss": "",
-		"pick.first": "git:https://github.com/back2dos/pick.first",
 		"tink_domspec": ""
 	},
 	"url": "https://github.com/back2dos/xDOM/",
