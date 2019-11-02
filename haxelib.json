@@ -3,15 +3,15 @@
 	"classPath": "src",
 	"dependencies": {
 		"tink_csss": "",
-		"tink_domspec": "",
-		"pick.first": "git:https://github.com/back2dos/pick.first"
+		"pick.first": "git:https://github.com/back2dos/pick.first",
+		"tink_domspec": ""
 	},
 	"url": "https://github.com/back2dos/xDOM/",
 	"contributors": [
 		"back2dos"
 	],
-	"version": "0.1.0",
-	"releasenote": "Initial version.",
+	"version": "0.2.0",
+	"releasenote": "Haxe 4 compatibility.",
 	"tags": [
 		"dom",
 		"html",
