@@ -9,8 +9,8 @@
 	"contributors": [
 		"back2dos"
 	],
-	"version": "0.2.1",
-	"releasenote": "Support Haxe 4 final (drop prereleases)",
+	"version": "0.2.2",
+	"releasenote": "Support tagless selectors.",
 	"tags": [
 		"dom",
 		"html",
