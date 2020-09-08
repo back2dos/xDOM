@@ -24,8 +24,8 @@ abstract EventSource<T, E:NativeEvent>(Callback<Evt<T, E>>->CallbackLink) {
   @:to function get_signal():Signal<Evt<T, E>> {
     var self:Dynamic = this;
     if (self.__xdomSignal == null)
-      self.__xdomSignal = Signal.create(
-        function (cb) return this(cb)
+      self.__xdomSignal = new Signal(
+        cb -> this(cb)
       );
     return self.__xdomSignal;
   }
@@ -67,9 +67,9 @@ abstract EventSource<T, E:NativeEvent>(Callback<Evt<T, E>>->CallbackLink) {
     });
   }
 
-  @:noCompletion 
+  @:noCompletion
   static public function make<T, E:NativeEvent>(target:T, event:String)
-    return 
+    return
       if (target != null && untyped target.addEventListener != null) {
         var target:js.html.Element = cast target;
         new EventSource<T, E>(function (cb) {
@@ -102,12 +102,12 @@ abstract EventSource<T, E:NativeEvent>(Callback<Evt<T, E>>->CallbackLink) {
         delegate(cb);
     }
   }
-  
+
 }
 
 @:forward
 abstract EventSignal<T>(Signal<T>) from Signal<T> to Signal<T> {
-  public function once(c:Callback<T>):CallbackLink 
+  public function once(c:Callback<T>):CallbackLink
     return callOnce(this.handle, c);
 
   @:noCompletion
@@ -118,7 +118,7 @@ abstract EventSignal<T>(Signal<T>) from Signal<T> to Signal<T> {
     var link:CallbackLink = null;
     link = register(function (v) {
       c.invoke(v);
-      link.dissolve();
+      link.cancel();
       c = null;
       link = null;
     });
