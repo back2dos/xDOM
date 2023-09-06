@@ -15,7 +15,7 @@ abstract Dataset(Dynamic<DatasetValue>) {
     __setProperty(name, if (force == null) !__getProperty(name) else !force);
 }
 
-@:forward
+@:forward @:transitive
 abstract DatasetValue(String) from String {
 
   @:to inline function toInt()
